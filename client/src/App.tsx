@@ -35,6 +35,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     requestPermission();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
