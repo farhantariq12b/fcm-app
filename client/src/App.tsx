@@ -6,6 +6,7 @@ import { messaging } from './utils/firebase';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNotification } from './context/NotificationContext';
+import Header from './components/shared/Header';
 
 
 const App: React.FC = () => {
@@ -40,6 +41,7 @@ const App: React.FC = () => {
 
   return (
     <>
+      <Header />
       <ToastContainer />
       <Routes>
         <Route path='/' element={<NotificationPage />} />
