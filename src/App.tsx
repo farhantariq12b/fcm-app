@@ -1,25 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import NotificationPage from './views/NotificationPage';
+import { getToken } from 'firebase/messaging';
+import { messaging } from './utils/firebase';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNotification } from './context/NotificationContext';
 
-function App() {
+
+const App: React.FC = () => {
+  const { setToken } = useNotification();
+
+  async function requestPermission() {
+    try {
+
+      //requesting permission using Notification API
+      const permission = await Notification.requestPermission();
+
+      if (permission === "granted") {
+        const token = await getToken(messaging, {
+          vapidKey: process.env.REACT_APP_FIREBASE_VAPID_TOKEN,
+        });
+
+        setToken(token)
+      } else if (permission === "denied") {
+        //notifications are blocked
+        throw new Error('You have denined the notification access kindly enable it to see notification')
+      }
+    } catch (error: any) {
+      toast.error(error.message || "Something went wrong while enabling notifications");
+    }
+
+  }
+
+  useEffect(() => {
+    requestPermission();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ToastContainer />
+      <Routes>
+        <Route path='/' element={<NotificationPage />} />
+      </Routes>
+    </>
   );
 }
 
