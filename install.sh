@@ -1,5 +1,5 @@
 cd client
 npm i
 
-cd server
+cd ../server
 npm i
