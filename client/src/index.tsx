@@ -12,10 +12,10 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <BrowserRouter>
-    <UserProvider>
-      <NotificationProvider>
+    <NotificationProvider>
+      <UserProvider>
         <App />
-      </NotificationProvider>
-    </UserProvider>
+      </UserProvider>
+    </NotificationProvider>
   </BrowserRouter>
 );

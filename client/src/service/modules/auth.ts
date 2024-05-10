@@ -6,7 +6,7 @@ class AuthService {
   static login(data: LoginBody) {
     return api({
       method: 'post',
-      url: '/login',
+      url: '/auth/login',
       data
     })
   }
@@ -15,7 +15,7 @@ class AuthService {
   static signup(data: SingUpBody) {
     return api({
       method: 'post',
-      url: `/sign-up`,
+      url: `/auth/sign-up`,
       data
     })
   }

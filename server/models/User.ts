@@ -8,6 +8,7 @@ import {
 } from '@sequelize/core';
 import { Attribute, PrimaryKey, AutoIncrement, NotNull, HasMany } from '@sequelize/core/decorators-legacy';
 import { UserNotification } from './UserNotification';
+import { Subscription } from './Subscription';
 
 export class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
   @Attribute(DataTypes.INTEGER)
@@ -35,5 +36,9 @@ export class User extends Model<InferAttributes<User>, InferCreationAttributes<U
 
   @HasMany(() => UserNotification, /* foreign key */ 'userId')
   declare notifications?: NonAttribute<UserNotification[]>;
+
+  @HasMany(() => Subscription, /* foreign key */ 'userId')
+  declare subscriptions?: NonAttribute<Subscription[]>;
+
 }
 

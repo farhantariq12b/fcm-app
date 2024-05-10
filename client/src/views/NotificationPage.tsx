@@ -1,26 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from '../components/shared/Button';
 import { messaging, onMessage } from '../utils/firebase';
 import { toast } from 'react-toastify';
 import Notification from '../components/Notification';
+import NotificationService from '../service/modules/notification';
 
 const NotificationPage: React.FC = () => {
-  const handleButton1Click = () => {
+  const handleButton1Click = async () => {
     console.log("Button 1 clicked");
+    await NotificationService.sendNotification({ title: 'Button 1 clicked', body: 'You have clicked button 1' })
   };
 
-  const handleButton2Click = () => {
+  const handleButton2Click = async () => {
     console.log("Button 2 clicked");
+    await NotificationService.sendNotification({ title: 'Button 2 clicked', body: 'You have clicked button 2' })
   };
 
-  const handleButton3Click = () => {
+  const handleButton3Click = async () => {
     console.log("Button 3 clicked");
+    await NotificationService.sendNotification({ title: 'Button 3 clicked', body: 'You have clicked button 3' })
   };
 
-
-  onMessage(messaging, (payload) => {
-    toast(<Notification notification={payload.notification || {}} />)
-  })
+  useEffect(() => {
+    onMessage(messaging, (payload) => {
+      console.log('receiving', payload)
+      toast(<Notification notification={payload.data || {}} />)
+    })
+  }, [])
 
   return (
     <div className="container mx-auto max-w-md mt-10">

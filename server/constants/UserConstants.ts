@@ -13,6 +13,15 @@ const UserConstants = Object.freeze({
     PASSWORD_DOES_NOT_MATCH: 'Invalid email or password',
     USER_NOT_FOUND: 'User not found',
     TOKEN_IS_INVALID_OR_EXPIRED: 'Token is invalid or expired',
+  },
+
+  Subscription: {
+    CREATION_OF_SUBSCRIPTION_FAILED: 'Something went wrong while creating subscription. Please try again.',
+  },
+
+  Notification: {
+    SENDING_NOTIFICATION_FAILED: 'Something went wrong while sending notification. Please try again.',
+    
   }
 
 });

@@ -8,6 +8,7 @@ import 'dotenv/config'
 import routes from './routes';
 import sequelize from './db';
 import { User } from './interfaces/Auth';
+import cors from 'cors';
 
 const app = express();
 const port = process.env.PORT || 8000;
@@ -20,6 +21,7 @@ declare global {
   }
 }
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -30,7 +32,7 @@ async function startServer() {
   try {
     console.log('connecting with database')
     await sequelize.authenticate();
-    await sequelize.sync();
+    await sequelize.sync({});
     console.log('connected with database')
 
     app.listen(port, () => {

@@ -1,21 +1,29 @@
 import api from "..";
 
-class DeliverableService {
+class NotificationService {
 
-  static getDeliverables() {
+  static sendNotification(data: any) {
     return api({
-      method: 'GET',
-      url: '/deliverables',
+      method: 'post',
+      url: '/notifications/send',
+      data
     })
   }
 
-
-  static getDeliverableById(deliverableId: number) {
+  static updateNotification(id: number) {
     return api({
-      method: 'GET',
-      url: `/deliverables/${deliverableId}`,
+      method: 'put',
+      url: `/notifications/${id}`
+    })
+  }
+
+  static createSubscription(data: any) {
+    return api({
+      method: 'post',
+      url: `/subscriptions`,
+      data
     })
   }
 }
 
-export default DeliverableService;
+export default NotificationService;

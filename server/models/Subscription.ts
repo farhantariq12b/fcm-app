@@ -7,21 +7,22 @@ import {
 } from '@sequelize/core';
 import { Attribute, PrimaryKey, AutoIncrement, NotNull } from '@sequelize/core/decorators-legacy';
 
-export class UserNotification extends Model<InferAttributes<UserNotification>, InferCreationAttributes<UserNotification>> {
+export class Subscription extends Model<InferAttributes<Subscription>, InferCreationAttributes<Subscription>> {
   @Attribute(DataTypes.INTEGER)
   @PrimaryKey
   @AutoIncrement
   declare id: CreationOptional<number>;
 
-  @Attribute(DataTypes.JSON)
+  @Attribute(DataTypes.STRING)
   @NotNull
-  declare data: any;
+  declare token: string;
+
+  @Attribute(DataTypes.STRING)
+  @NotNull
+  declare device?: string;
 
   @Attribute(DataTypes.INTEGER)
   @NotNull
   declare userId?: number;
-
-  @Attribute(DataTypes.DATE)
-  declare readAt?: Date | null;
 }
 

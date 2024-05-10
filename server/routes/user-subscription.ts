@@ -3,7 +3,6 @@ import NotificationController from '../app/notifications/NotificationController'
 
 const router = express.Router();
 
-router.post('/send', NotificationController.sendNotification);
-router.put('/:id', NotificationController.updateNotification);
+router.post('/', NotificationController.createSubscription);
 
 export default router;
